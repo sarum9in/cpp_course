@@ -153,9 +153,43 @@ morekeywords={*,...}            % if you want to add more keywords to the set
     \begin{frame}{Примеры}
         \lstinputlisting{examples/address.cpp}
     \end{frame}
+    \section{Выполнение программы}
+    \subsection{Соответствие стандарту}
+    \begin{frame}{Соответствие стандарту}
+        \begin{itemize}
+            \item Соответствующая стандарту программа должна воспроизводить одинаковое \textit{наблюдаемое} поведение
+                на одинаковых входных данных.
+            \item Международный стандарт не требует конкретного поведения от программ, не соответствующих ему.
+        \end{itemize}
+    \end{frame}
+    \subsection{Побочные эффекты}
+    \begin{frame}{Побочные эффекты}
+        \begin{itemize}
+            \item Доступ к объекту volatile glvalue.
+            \item Изменение объекта.
+            \item Обращение к подсистеме I/O.
+            \item Вызов функции, совершающей одну этих операций.
+        \end{itemize}
+    \end{frame}
+    \subsection{Выражение}
+    \begin{frame}{Выражение}
+        \textit{Full-expression} (полное выражение) -- такое выражение, которое не является подвыражением ни одного другого выражения.
+    \end{frame}
+    \subsection{Порядок выполнения}
+    \subsubsection{Отношение порядка выполнения}
+    \begin{frame}{Отношение порядка выполнения}
+        \begin{itemize}
+            \item «Sequenced before» является бинарным асимметричным и транзитивным отношением.
+            \item Если отношение не определено ни для (A, B), ни для (B, A), то A и B unsequenced,
+                то есть их порядок их выполнения не определён (в том числе, выполнение может перекрываться).
+        \end{itemize}
+    \end{frame}
+    %\subsubsection{TODO side effects
+    % TODO operation sequence
+    % TODO 1.10 threads
     \section{Время жизни объекта}
     % 3.10 value categories
-    \subsection{}
-    \begin{frame}{}
-    \end{frame}
+    %\subsection{}
+    %\begin{frame}{}
+    %\end{frame}
 \end{document}
