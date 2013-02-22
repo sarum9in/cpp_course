@@ -1,6 +1,6 @@
-%.pdf: $(wildcard *.tex) $(addsuffix .ps,$(basename $(wildcard *.dot)))
+%.pdf: $(wildcard *.tex) $(addsuffix .ps,$(basename $(wildcard *.dot))) $(wildcard examples/*.cpp)
 	xelatex $<
-	xelatex $<
+	#xelatex $<
 
 main.pdf:
 
@@ -14,3 +14,5 @@ clean:
 	$(RM) *.ps *.pdf *.aux *.log *.toc *.nav *.snm *.out
 
 .PHONY: open clean
+
+# vim:noexpandtab:

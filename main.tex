@@ -97,5 +97,63 @@ morekeywords={*,...}            % if you want to add more keywords to the set
         \end{itemize}
     \end{frame}
     \section{Объектная модель}
-    \section{}
+    \begin{frame}{Объектная модель}
+        \begin{block}{Определение}
+            \textbf{Объект} -- область памяти.
+        \end{block}
+        \begin{block}{Свойства}
+            \begin{itemize}
+                \item Имя (опционально).
+                \item Продолжительность хранения -- storage duration (относится к области памяти, в которой хранится объект).
+                \item Время жизни -- lifetime (не превышает storage duration).
+                \item Тип.
+            \end{itemize}
+        \end{block}
+        \begin{block}{Действия}
+            \begin{itemize}
+                \item Создать объект.
+                \item Уничтожить объект.
+                \item Указать на объект.
+                \item Обращаться к объекту.
+                \item Управлять объектами.
+            \end{itemize}
+        \end{block}
+    \end{frame}
+    \subsection{Виды объектов}
+    \begin{frame}{Виды объектов}
+        \begin{itemize}
+            \item Subobject
+                \begin{itemize}
+                    \item объект член другого объекта
+                    \item объект базовый класс
+                    \item элемент массива
+                \end{itemize}
+            \item Most-derived object
+                \begin{itemize}
+                    \item Подкласс любого класса, экземпляром которого является объект, называется most-derived class.
+                    \item Объект неклассового типа или класса most-derived class называется most-derived object.
+                \end{itemize}
+        \end{itemize}
+    \end{frame}
+    \subsection{Адреса объектов}
+    \begin{frame}{Адреса объектов}
+        \begin{itemize}
+            \item Исключая битовые поля, most-derived object имеет ненулевой размер, занимая при этом 1 или более байт
+                пространства памяти.
+            \item Исключая битовые поля и объекты базовых классов, адрес объекта -- это адрес первого байта занимаемой им памяти.
+            \item Исключая битовые поля, два объекта могут иметь одинаковый адрес, если
+                \begin{itemize}
+                    \item один является subobject'ом другого
+                    \item один из объектов базового класса имеет нулевой размер, и они разного типа
+                \end{itemize}
+            \item В остальных случаях объекты имеют разный адрес.
+        \end{itemize}
+    \end{frame}
+    \begin{frame}{Примеры}
+        \lstinputlisting{examples/address.cpp}
+    \end{frame}
+    \section{Время жизни объекта}
+    \subsection{}
+    \begin{frame}{}
+    \end{frame}
 \end{document}
