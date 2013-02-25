@@ -192,10 +192,6 @@ morekeywords={*,...}            % if you want to add more keywords to the set
             \item Вызов функции, совершающей одну этих операций.
         \end{itemize}
     \end{frame}
-    \subsection{Выражение}
-    \begin{frame}{Выражение}
-        \textit{Full-expression} (полное выражение) -- такое выражение, которое не является подвыражением ни одного другого выражения.
-    \end{frame}
     \subsection{Порядок выполнения}
     \subsubsection{Отношение порядка выполнения}
     \begin{frame}{Отношение порядка выполнения}
@@ -203,11 +199,34 @@ morekeywords={*,...}            % if you want to add more keywords to the set
             \item «Sequenced before» является бинарным асимметричным и транзитивным отношением.
             \item Если отношение не определено ни для (A, B), ни для (B, A), то A и B unsequenced,
                 то есть их порядок их выполнения не определён (в том числе, выполнение может перекрываться).
+            \item Операции A и B считаются «indeterminately sequenced», если sequenced либо (A, B), либо (B, A), но не указано которое.
         \end{itemize}
     \end{frame}
-    %\subsubsection{TODO side effects
+    \subsection{Выражение}
+    \begin{frame}{Выражение}
+        \begin{itemize}
+            \item \textit{Full-expression} (полное выражение) -- такое выражение, которое не является подвыражением ни одного другого выражения.
+            \item Все побочные эффекты, связнные с вычислением полного выражения, \textit{происходят до} побочных эффектов следующего полного выражения.
+            \item Исключая некоторые оговоренные случаи, порядок вычисления операндов отдельных операторов, а так же подвыражений отдельных выражений \textit{не определён}.
+            \item Вычисление значений операндов \textit{происходит до} вычисления результата действия оператора.
+        \end{itemize}
+    \end{frame}
+    \begin{frame}{Выражение}
+        \begin{itemize}
+            \item В выражении, вычисляемом больше одного раза во время работы программы, порядок вычисления его \textit{неупорядоченных} подвыражений может отличаться.
+            \item Если порядок побочного эффекта относительно другого побочного эффекта, либо использования этого скаляра не определён, то \textit{поведение не определено}.
+            \item Вычисление аргументов функции \textit{происходит до } выполнения тела функции.
+            \item Вычисления функций \textit{не пересекаются}.
+        \end{itemize}
+    \end{frame}
+    \begin{frame}{Примеры}
+        \lstinputlisting{examples/side_effects.cpp}
+    \end{frame}
     % TODO operation sequence
     % TODO 1.10 threads
+    % TODO signals
+
+
     \section{Время жизни объекта}
     % 3.10 value categories
     %\subsection{}
