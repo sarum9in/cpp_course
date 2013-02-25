@@ -2,20 +2,11 @@
 
 struct A {};
 
-struct B: A
-{
-    int x;
-};
+struct B: A { int x; };
 
-struct C
-{
-    int x;
-};
+struct C { int x; };
 
-struct D: C
-{
-    int y;
-};
+struct D: C { int y; };
 
 int main()
 {
@@ -28,4 +19,3 @@ int main()
     C *c = &d;
     assert_equal_ptr(&d, c); // base subobject has nonzero size
 }
-
