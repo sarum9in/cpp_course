@@ -164,6 +164,25 @@ morekeywords={*,...}            % if you want to add more keywords to the set
             \item Международный стандарт не требует конкретного поведения от программ, не соответствующих ему.
         \end{itemize}
     \end{frame}
+    \subsection{Виды «поведения»}
+    \begin{frame}{Виды «поведения»}
+        \begin{block}{Specified}
+            Явно указанные в стандарте. \\
+            Пример: $sizeof(char)$.
+        \end{block}
+        \begin{block}{Implementation defined}
+            Зависят от реализации (компилятора, ОС). \\
+            Пример: $sizeof(int)$.
+        \end{block}
+        \begin{block}{Unspecified}
+            Стандарт задаёт допустимые рамки поведения. \\
+            Пример: последовательность вычисления аргументов функции $f(g(x), h(y))$.
+        \end{block}
+        \begin{block}{Undefined}
+            Стандарт не определяет никаких требований к программам, содержащим undefined~behavior. \\
+            Пример: попытка изменить const-объект.
+        \end{block}
+    \end{frame}
     \subsection{Побочные эффекты}
     \begin{frame}{Побочные эффекты}
         \begin{itemize}
