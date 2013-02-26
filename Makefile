@@ -1,6 +1,6 @@
 %.pdf: $(wildcard *.tex) $(addsuffix .ps,$(basename $(wildcard *.dot))) $(wildcard examples/*.cpp)
 	xelatex $<
-	#xelatex $<
+	xelatex $<
 
 main.pdf:
 
