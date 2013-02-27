@@ -1,6 +1,6 @@
-%.pdf: %.tex $(wildcard *.tex) $(addsuffix .ps,$(basename $(wildcard *.dot))) $(wildcard examples/*.cpp)
-	xelatex $<
-	xelatex $<
+%.pdf: %.tex header.tex intro.tex
+	xelatex $< || (rm -f $@ && exit 1)
+	xelatex $< || (rm -f $@ && exit 1)
 
 TARGETS=$(addsuffix .pdf,$(basename $(wildcard lection*.tex)))
 
