@@ -4,7 +4,7 @@
 
 TARGETS=$(addsuffix .pdf,$(basename $(wildcard lection*.tex)))
 
-$(TARGETS):
+all: $(TARGETS)
 
 %.ps: %.dot
 	dot -Tps:cairo -o$@ $<
@@ -12,6 +12,6 @@ $(TARGETS):
 clean:
 	$(RM) *.ps *.pdf *.aux *.log *.toc *.nav *.snm *.out
 
-.PHONY: open clean
+.PHONY: all open clean
 
 # vim:noexpandtab:
