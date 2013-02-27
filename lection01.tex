@@ -1,69 +1,4 @@
-\documentclass[xetex,mathserif,serif,10pt]{beamer}
-%\documentclass[11pt]{article}
-\usepackage{xltxtra}
-\usepackage{polyglossia}
-\setdefaultlanguage[spelling=modern]{russian}
-%\setmainfont[Mapping=tex-text]{DejaVu Sans}
-%\setmainfont[Mapping=tex-text]{Liberation Sans}
-\setmonofont[Mapping=tex-text]{DejaVu Sans Mono}
-\setmainfont[Mapping=tex-text]{Linux Libertine O}
-%\setmonofont[Mapping=tex-text]{Liberation Mono}
-
-\usepackage{verbatim}
-\usepackage{tabularx}
-\usepackage{float}
-\usepackage{url}
-
-\usepackage{indentfirst}
-
-\usepackage{algorithm}
-\usepackage{algorithmic}
-
-%\usepackage[a4paper]{geometry}
-%\geometry{left=25mm}
-%\geometry{right=25mm}
-%\geometry{top=25mm}
-%\geometry{bottom=15mm}
-
-%\setbeamertemplate{caption}[numbered]
-
-\newcommand{\includepicture}[3]{
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-%\large{\textbf{#2}}
-\includegraphics[#3]{#1}
-\end{center}
-\caption{#2}
-\end{figure}
-}
-
-\usepackage{listings}
-\lstset{ %
-language=C++,                   % the language of the code
-basicstyle=\scriptsize,         % the size of the fonts that are used for the code
-numbers=left,                   % where to put the line-numbers
-numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
-stepnumber=1,                   % the step between two line-numbers. If it's 1, each line 
-                                % will be numbered
-numbersep=5pt,                  % how far the line-numbers are from the code
-%backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
-showspaces=false,               % show spaces adding particular underscores
-showstringspaces=false,         % underline spaces within strings
-showtabs=false,                 % show tabs within strings adding particular underscores
-frame=single,                   % adds a frame around the code
-tabsize=2,                      % sets default tabsize to 2 spaces
-captionpos=b,                   % sets the caption-position to bottom
-breaklines=true,                % sets automatic line breaking
-breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
-title=\lstname,                 % show the filename of files included with \lstinputlisting;
-                                % also try caption instead of title
-escapeinside={\%*}{*)},         % if you want to add a comment within your code
-morekeywords={*,...}            % if you want to add more keywords to the set
-}
-
-%\usetheme{Warsaw}
-\usetheme{Singapore}
+\include{header}
 
 \begin{document}
     \title[C++]{C++}
@@ -140,6 +75,9 @@ morekeywords={*,...}            % if you want to add more keywords to the set
                 \end{itemize}
             \item В остальных случаях объекты имеют разный адрес.
         \end{itemize}
+    \end{frame}
+    \begin{frame}{Примеры}
+        \lstinputlisting{examples/address.cpp}
     \end{frame}
     \begin{frame}{Примеры}
         \lstinputlisting{examples/address.cpp}
@@ -243,6 +181,14 @@ morekeywords={*,...}            % if you want to add more keywords to the set
             \item Подряд идущие строковые литералы конкатенируются.
         \end{itemize}
     \end{frame}
+    \section{Самостоятельно}
+    \begin{frame}{Самостоятельно}
+        \begin{itemize}
+            \item Изучить (читать \textit{посмотреть на}) ключевые слова языка,
+                чтобы иметь представление, какие имена использовать нельзя.
+            \item Изучить набор разрешённых для использования в исходном коде символов.
+        \end{itemize}
+    \end{frame}
     \begin{frame}{Фазы трансляции}
         \begin{itemize}
             \item Каждый комментарий заменяется одним пробельным символом.
@@ -252,7 +198,7 @@ morekeywords={*,...}            % if you want to add more keywords to the set
             \item Директивы $"\sharp{include}"$ запускают рекурсивную обработку указанного файла рекурсивно.
             \item Удаляются все директивы препроцессора.
             \item Происходит синтаксический и семантический анализ.
-            \item [Опционально] происходит компановка единиц трансляции в исполняемые файлы либо статические библиотеки.
+            \item (Опционально) происходит компановка единиц трансляции в исполняемые файлы либо статические библиотеки.
         \end{itemize}
     \end{frame}
     \section{Самостоятельно}
@@ -260,8 +206,6 @@ morekeywords={*,...}            % if you want to add more keywords to the set
         \begin{itemize}
             \item Разобрать процесс трансляции для любого (выбранного) компилятора C++.
             \item Рассмотреть типы директив препроцессора.
-            \item Изучить (читать \textit{посмотреть на}) ключевые слова языка,
-                чтобы иметь представление, какие имена использовать нельзя.
         \end{itemize}
     \end{frame}
     \section{GCC}

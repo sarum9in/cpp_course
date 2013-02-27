@@ -1,11 +1,10 @@
-%.pdf: $(wildcard *.tex) $(addsuffix .ps,$(basename $(wildcard *.dot))) $(wildcard examples/*.cpp)
+%.pdf: %.tex $(wildcard *.tex) $(addsuffix .ps,$(basename $(wildcard *.dot))) $(wildcard examples/*.cpp)
 	xelatex $<
 	xelatex $<
 
-main.pdf:
+TARGETS=$(addsuffix .pdf,$(basename $(wildcard lection*.tex)))
 
-open: main.pdf
-	xdg-open $<
+$(TARGETS):
 
 %.ps: %.dot
 	dot -Tps:cairo -o$@ $<
