@@ -127,13 +127,18 @@
         \lstinputlisting{examples/conditional_inclusion_task.cpp}
     \end{frame}
     \subsection{Включение файлов с исходным кодом}
+    \subsubsection{Описание}
     \begin{frame}{Включение файлов с исходным кодом}
         \begin{itemize}
             \item \#include <name> ищет файл "name" \textit{implementation-defined}.
             \item \#include "name" ищет файл "name" \textit{implementation-defined}, в случае неудачи,
                 поиск происходит так, как будто использовался предыдущий вариант директивы \#include <name>.
-            \item \#include NAME
+            \item \#include TOKEN0 TOKEN1... производит подстановку макросов TOKEN, после чего выполняется директива.
         \end{itemize}
+    \end{frame}
+    \subsubsection{Примеры}
+    \begin{frame}{Примеры}
+        \lstinputlisting{examples/source_inclusion.cpp}
     \end{frame}
     \section{Самостоятельно}
     \begin{frame}{Самостоятельно}
