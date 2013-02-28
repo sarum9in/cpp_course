@@ -73,18 +73,66 @@
         \end{itemize}
     \end{frame}
     \subsection{Условное включение}
+    \subsubsection{Пример}
+    \begin{frame}{Условное включение, пример}
+        \lstinputlisting{examples/conditional_inclusion_simple.cpp}
+    \end{frame}
+    \subsubsection{Описание}
     \begin{frame}{Условное включение}
         \begin{itemize}
-            \item
+            \item Использует одно или несколько выражений, используемых для определения "включать ли код?".
+            \item Выражение может содержать целочисленное выражение, вычисляемое на этапе препроцессерирования.
+            \item Обработка данных происходит в std::intmax\_t или std::uintmax\_t.
+            \item Специальным образом обрабатыватся унарный оператор defined в форме "defined(symbol)" или "defined symbol",
+                возвращающий 1 или 0 в зависимости от того, определён ли в данный момент "symbol" директивой \#define (без последующей \#undef).
         \end{itemize}
+    \end{frame}
+    \begin{frame}{Условное включение}
+        \begin{itemize}
+            \item В выражении происходит подстановка макроопределений.
+            \item Если в результате подстановки макроопределений появится оператор defined, \textit{поведение не определено}.
+            \item После подстановки и выполнения оператора defined все оставшиеся слова кроме true и false заменяются на 0.
+            \item В выражении обрабатываются литералы типа char.
+            \item Коды символов в препроцессоре могут отличаться от тех, что используются вне контекста препроцессора, поведение \textit{implementation-defined}.
+            \item Директивы могут вкладываться.
+        \end{itemize}
+    \end{frame}
+    \begin{frame}{Условное включение: синтаксис}
+        \begin{enumerate}
+            \item
+                \begin{itemize}
+                    \item \#if выражение
+                    \item \#ifdef символ // эквивалентно \#if defined(символ)
+                    \item \#ifndef символ // эквивалентно \#if !defined(символ)
+                \end{itemize}
+            \item произвольное количество \#elif выражение
+            \item опционально \#else-директива
+            \item \#endif
+        \end{enumerate}
+    \end{frame}
+    \subsubsection{Примеры}
+    \begin{frame}{Примеры}
+        \lstinputlisting{examples/conditional_inclusion_if.cpp}
+    \end{frame}
+    \begin{frame}{Примеры}
+        \lstinputlisting{examples/conditional_inclusion_ifdef.cpp}
+    \end{frame}
+    \begin{frame}{Примеры}
+        \lstinputlisting{examples/conditional_inclusion_ifndef.cpp}
+    \end{frame}
+    \begin{frame}{Примеры}
+        \lstinputlisting{examples/conditional_inclusion_wordsize.cpp}
+    \end{frame}
+    \begin{frame}{Примеры: что выведет код на экране?}
+        \lstinputlisting{examples/conditional_inclusion_task.cpp}
     \end{frame}
     \subsection{Включение файлов с исходным кодом}
     \begin{frame}{Включение файлов с исходным кодом}
         \begin{itemize}
             \item \#include <name> ищет файл "name" \textit{implementation-defined}.
             \item \#include "name" ищет файл "name" \textit{implementation-defined}, в случае неудачи,
-                поиск происходит так, как будто использовался предыдущий вариант директивы \#{include} <name>.
-            \item \#{include} NAME
+                поиск происходит так, как будто использовался предыдущий вариант директивы \#include <name>.
+            \item \#include NAME
         \end{itemize}
     \end{frame}
     \section{Самостоятельно}
