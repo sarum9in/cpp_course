@@ -33,7 +33,8 @@
         \end{itemize}
     \end{frame}
     \subsection{Определение макроса}
-    \begin{frame}{Определение макроса}
+    \subsubsection{Переопределение}
+    \begin{frame}{Определение макроса: переопределение}
         \begin{itemize}
             \item Определённый объектный макрос может быть переопределён другой директивой \#define,
                 только если replacement-list нового определения повторяет старое, иначе \textit{программа некорректна}.
@@ -42,6 +43,13 @@
                 повторяют старое определение, иначе \textit{программа некорректна}.
         \end{itemize}
     \end{frame}
+    \begin{frame}{Примеры: корректное переопределение}
+        \lstinputlisting{examples/macros_redefinition_valid.cpp}
+    \end{frame}
+    \begin{frame}{Примеры: некорректное переопределение}
+        \lstinputlisting{examples/macros_redefinition_invalid.cpp}
+    \end{frame}
+    \subsubsection{Определение}
     \begin{frame}{Определение макроса}
         \begin{itemize}
             \item Идентификатор и список подстановки разделяются пробелом (потому "\#define X (a) a" определит объектный макрос).
