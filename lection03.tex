@@ -74,7 +74,7 @@
             \item Параметры, встретившиеся в списке подстановки, заменяются на аргументы,
                 в которых разворачиваются все макросы. Исключением являются
                 параметры, перед которыми стоят операторы \# или \#\#, а также те,
-                после которых стоит оператор \#\#: внтури них подстановка макросов не выполняется.
+                после которых стоит оператор \#\#: внутри них подстановка макросов не выполняется.
             \item Идентификатор \_\_VA\_ARGS\_\_, встретившийся в списке подстановки,
                 обрабатывается как параметр, заменяемый на вариативные (variadic) аргументы.
         \end{itemize}
@@ -175,6 +175,69 @@
         \lstinputlisting{examples/stringize_complete.cpp}
     \end{frame}
 
+    \section{Управление позицией файла: директива \#line}
+    \subsection{Синтаксис}
+    \begin{frame}{Синтаксис}
+        \begin{itemize}
+            \item \#line unsigned-integer \textbackslash{n}
+            \item \#line unsigned-integer character-string-literal \textbackslash{n}
+            \item \#line pp-tokens \textbackslash{n}
+        \end{itemize}
+    \end{frame}
+    \subsection{Использование}
+    \begin{frame}{Использование}
+        \begin{itemize}
+            \item Номер строки -- количество символов переноса строки, считанных до данного символа, увеличенное на 1.
+            \item Директива позволяет изменить предполагаемое имя файла и номер строки.
+            \item Если указанный номер строки превышает 2147483647, \textit{поведение не определено}.
+        \end{itemize}
+    \end{frame}
+
+    \section{Директива \#error}
+    \begin{frame}{Директива \#error}
+        \begin{itemize}
+            \item \#error pp-tokens \textbackslash{n}
+            \item Генерирует ошибку компиляции, включающую pp-tokens.
+            \item \textit{Не производит} подстановку макросов.
+        \end{itemize}
+    \end{frame}
+
+    \section{Директива \#warning}
+    \begin{frame}{Директива \#warning}
+        \begin{itemize}
+            \item \textbf{Не является стандартной.}
+            \item Аналогична директиве \#error.
+        \end{itemize}
+    \end{frame}
+
+    \section{Директива \#pragma}
+    \begin{frame}{Директива \#pragma}
+        \begin{itemize}
+            \item \#pragma pp-tokens \textbackslash{n}
+            \item Изменяет поведение реализации. Конкретный эффект \textit{определяется реализацией}.
+            \item Если директива не распознаётся реализацией, то она игнорируется.
+        \end{itemize}
+    \end{frame}
+
+    \section{Пустая директива}
+    \begin{frame}{Пустая директива}
+        \begin{itemize}
+            \item \# \textbackslash{n}
+        \end{itemize}
+    \end{frame}
+
+    \section{Оператор \_Pragma}
+    \begin{frame}{Оператор \_Pragma}
+        \begin{itemize}
+            \item \_Pragma(string-literal)
+            \item string-literal преобразуется в последовательность токенов препроцессора путём подстановки
+                содержимого string-literal с учётом экранированных символов `"' и `\textbackslash'.
+            \item Получившаяся последовательность токенов обрабатывается как будто это последовательность
+                стоит после директивы \#pragma.
+            \item Оператор вместе с аргументами удаляется.
+        \end{itemize}
+    \end{frame}
+
     \section{Самостоятельно}
     \begin{frame}{Самостоятельно}
         \begin{itemize}
@@ -182,31 +245,22 @@
                 \begin{itemize}
                     \item Альтернативная форма записи операторов.
                 \end{itemize}
-            \item
+            \item Предопределённые макроимена, их значение и использование:
+                \begin{itemize}
+                    \item \_\_cplusplus
+                    \item \_\_DATE\_\_
+                    \item \_\_FILE\_\_
+                    \item \_\_LINE\_\_
+                    \item \_\_STDC\_HOSTED\_\_
+                    \item \_\_TIME\_\_
+                    \item \_\_STDC\_\_
+                    \item \_\_STDC\_MB\_MIGHT\_NEQ\_WC\_\_
+                    \item \_\_STDC\_VERSION\_\_
+                    \item \_\_STDC\_ISO\_10646\_\_
+                    \item \_\_STDCPP\_STRICT\_POINTER\_SAFETY\_\_
+                    \item \_\_STDCPP\_THREADS\_\_
+                    \item Рассмотреть нестандартные макроимена, определённые в используемом компиляторе.
+                \end{itemize}
         \end{itemize}
     \end{frame}
-
-    % TODO macro replacement
-    \section{GCC}
-    \subsection{Препроцессор}
-    \subsubsection{Директивы}
-    \subsection{Компилятор}
-    \subsubsection{Ключевые слова}
-    \subsection{Ассемблер}
-    \subsubsection{Объектный файл}
-    \subsubsection{Статическая библиотека}
-    \subsection{Линкер}
-    \subsubsection{Исполняемый файл}
-    \subsubsection{Динамическая библиотека}
-
-    % TODO operation sequence
-    % TODO 1.10 threads
-    % TODO signals
-
-
-    %\section{Время жизни объекта}
-    % 3.10 value categories
-    %\subsection{}
-    %\begin{frame}{}
-    %\end{frame}
 \end{document}
