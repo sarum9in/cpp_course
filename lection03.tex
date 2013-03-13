@@ -1,0 +1,184 @@
+\include{header}
+
+\begin{document}
+    \include{intro}
+
+    \section{Макроподстановка}
+    \subsection{Список подстановки (replacement-list)}
+    \begin{frame}{Список подстановки (replacement-list)}
+        \begin{itemize}
+            \item Два списка подстановки считаются равными тогда и только тогда, когда
+                \begin{itemize}
+                    \item состоят из одинакового количества токенов препроцессора
+                    \item идущих в одинаковом порядке
+                    \item имеющих одинаковое написание
+                    \item разделённых одинаковыми последовательностями пробельных символов
+                \end{itemize}
+            \item Любые последовательности пробельных символов считаются одинаковыми.
+        \end{itemize}
+    \end{frame}
+    \subsection{Виды макросов}
+    \subsubsection{Объектный макрос: синтаксис}
+    \begin{frame}{Объектный макрос: синтаксис}
+        \begin{itemize}
+            \item \#define identifier replacement-list \textbackslash{n}
+        \end{itemize}
+    \end{frame}
+    \subsubsection{Функциональный макрос: синтаксис}
+    \begin{frame}{Функциональный макрос: синтаксис}
+        \begin{itemize}
+            \item \#define identifier(identifier-list) replacement-list \textbackslash{n}
+            \item \#define identifier(...) replacement-list \textbackslash{n}
+            \item \#define identifier(identifier-list, ...) replacement-list \textbackslash{n}
+        \end{itemize}
+    \end{frame}
+    \subsection{Определение макроса}
+    \begin{frame}{Определение макроса}
+        \begin{itemize}
+            \item Определённый объектный макрос может быть переопределён другой директивой \#define,
+                только если replacement-list нового определения повторяет старое, иначе \textit{программа некорректна}.
+            \item Определённый функциональный макрос может быть переопределён другой директивой \#define,
+                только если replacement-list нового определения, а так же количество, порядок и запись параметров
+                повторяют старое определение, иначе \textit{программа некорректна}.
+        \end{itemize}
+    \end{frame}
+    \begin{frame}{Определение макроса}
+        \begin{itemize}
+            \item Идентификатор и список подстановки разделяются пробелом (потому "\#define X (a) a" определит объектный макрос).
+            \item Идентификатор, следующий сразу за директивой \#define называется именем макроса. Пространство имён для всех макросов одно.
+            \item Любые пробелы до и после списка подстановки не считаются частью списка подстановки или макроса.
+            \item Символ \#, за которым следует идентификатор, встретившиеся в месте, где может начинаться директива препроцессора,
+                не являются кандидатом для макроподстановки.
+        \end{itemize}
+    \end{frame}
+    \subsection{Использование макроса}
+    \begin{frame}{}
+        \begin{itemize}
+            \item
+        \end{itemize}
+    \end{frame}
+    \subsection{Подстановка аргументов (функциональные макросы)}
+    \begin{frame}{Подстановка аргументов (функциональные макросы)}
+        \begin{itemize}
+            \item Параметры, встретившиеся в списке подстановки, заменяются на аргументы,
+                в которых разворачиваются все макросы. Исключением являются
+                параметры, перед которыми стоят операторы \# или \#\#, а также те,
+                после которых стоит оператор \#\#: внтури них подстановка макросов не выполняется.
+            \item Идентификатор \_\_VA\_ARGS\_\_, встретившийся в списке подстановки,
+                обрабатывается как параметр, заменяемый на вариативные (variadic) аргументы.
+        \end{itemize}
+    \end{frame}
+    \subsection{Оператор \#}
+    \begin{frame}{Оператор \#}
+        \begin{itemize}
+            \item Символьный строковый литерал -- строковый литерал без префикса.
+            \item После каждого символа \# должен стоять параметр макроса.
+            \item Последовательность символа \# и параметра заменяется
+                на запись аргумента.
+            \item Пробельные символы до первого токена препроцессора аргумента
+                и после последнего игнорируются.
+            \item Пробельные символы между токенами препроцессора аргумента
+                заменяются на один пробел.
+        \end{itemize}
+    \end{frame}
+    \begin{frame}{Оператор \#}
+        \begin{itemize}
+            \item Пустому аргументу соответствует строка "".
+            \item Символы `"' и `\textbackslash' экранируются символом `\textbackslash'.
+            \item Если результат подстановки не является корректным символьным строковым литералом,
+                \textit{поведение не определено}.
+            \item Порядок операторов \# и \#\# \textit{не определён}.
+        \end{itemize}
+    \end{frame}
+    \subsection{Оператор \#\#}
+    \begin{frame}{Оператор \#\#}
+        \begin{itemize}
+            \item \#\# не должен встречаться в начале или конце определения макроса.
+            \item В функциональных макросах параметр, стоящий до или после \#\#,
+                заменяется на соответствующую аргументу последовательность токенов препроцессора.
+            \item Если аргумент пустой, то он заменяется на \textit{placemarker}.
+            \item До начала следующего цикла обработки макросов все последовательности
+                \#\# удаляются, а токены препроцессора слева и справа от оператора конкатенируются.
+        \end{itemize}
+    \end{frame}
+    \begin{frame}{Оператор \#\#}
+        \begin{itemize}
+            \item Конкатенация токена препроцессора и \textit{placemarker}'а даёт тот же самый токен препроцессора.
+            \item Конкатенация двух \textit{placemarker}'ов даёт один \textit{placemarker}.
+            \item Если в результате получается некорректный токен препроцессора, \textit{поведение не определено}.
+            \item Порядок выполнения операторов \#\# \textit{не определён}.
+        \end{itemize}
+    \end{frame}
+    \subsubsection{Примеры}
+    \begin{frame}{Примеры}
+        \lstinputlisting{examples/hash_hash.cpp}
+    \end{frame}
+    \subsection{Повторное сканирование и подстановка}
+    \begin{frame}{Повторное сканирование и подстановка}
+        \begin{itemize}
+            \item После подстановки всех параметров и выполнения всех операторов \# и \#\# все \textit{placemarker}'ы удаляются.
+            \item После этого получившаяся последовательность токенов сканируется снова для поиска макросов для подстановки.
+            \item Если некоторая подпоследовательность токенов препроцессора является результатом выполнения макроса,
+                то данный макрос внутри данной подпоследовательности токенов больше не выполняется.
+            \item Получившаяся последовательность токенов не обрабатывается как директива препроцессора,
+                даже если похожа на таковую. Но в ней выполняются унарные операторы \_Pragma.
+        \end{itemize}
+    \end{frame}
+    \subsection{Время жизни макроса}
+    \begin{frame}{Время жизни макроса}
+        \begin{itemize}
+            \item Макрос действует до первой, соответствующей ему, директива \#undef, либо до конца файла.
+            \item Макрос не имеет значения после фазы препроцессирования.
+        \end{itemize}
+    \end{frame}
+    \subsubsection{Директива \#undef}
+    \begin{frame}{Директива \#undef}
+        \begin{itemize}
+            \item \#undef identifier \textbackslash{n}
+            \item Отменяет действие указанного макроса.
+            \item Игнорируется, если identifier не является именем макроса.
+        \end{itemize}
+    \end{frame}
+    \subsection{Примеры}
+    \begin{frame}{Stringize}
+        \lstinputlisting{examples/stringize.cpp}
+    \end{frame}
+    \begin{frame}{Stringize complete}
+        \lstinputlisting{examples/stringize_complete.cpp}
+    \end{frame}
+
+    \section{Самостоятельно}
+    \begin{frame}{Самостоятельно}
+        \begin{itemize}
+            \item Альтернативные токены (Alternative tokens).
+                \begin{itemize}
+                    \item Альтернативная форма записи операторов.
+                \end{itemize}
+            \item
+        \end{itemize}
+    \end{frame}
+
+    % TODO macro replacement
+    \section{GCC}
+    \subsection{Препроцессор}
+    \subsubsection{Директивы}
+    \subsection{Компилятор}
+    \subsubsection{Ключевые слова}
+    \subsection{Ассемблер}
+    \subsubsection{Объектный файл}
+    \subsubsection{Статическая библиотека}
+    \subsection{Линкер}
+    \subsubsection{Исполняемый файл}
+    \subsubsection{Динамическая библиотека}
+
+    % TODO operation sequence
+    % TODO 1.10 threads
+    % TODO signals
+
+
+    %\section{Время жизни объекта}
+    % 3.10 value categories
+    %\subsection{}
+    %\begin{frame}{}
+    %\end{frame}
+\end{document}
